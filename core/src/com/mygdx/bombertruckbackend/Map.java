@@ -16,7 +16,7 @@ public class Map {
 	}
 	
 	public Map(int x, int y, boolean tester) {
-		mapSizeX = x;
+		mapSizeX = x; 
 		mapSizeY = y;
 		initMap();
 		if (tester == true) {
@@ -26,6 +26,7 @@ public class Map {
 	}
 	
 	private void initMap() {
+		map = new Maplocation[mapSizeX][mapSizeY];
 		for(int x = 0; x < mapSizeX; x++) {
 			for (int y = 0; y < mapSizeY; y++) {
 				map[x][y] = new Maplocation(x,y,this);
@@ -58,7 +59,7 @@ public class Map {
 		if (map == null) {
 			return null;
 		} 
-		else if ((mapSizeX > x) || (x < 0) || (mapSizeY > y) || (y < 0)) {
+		else if ((mapSizeX < x) || (x < 0) || (mapSizeY < y) || (y < 0)) {
 			return null;
 		}
 		else {

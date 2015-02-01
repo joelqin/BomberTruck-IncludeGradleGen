@@ -12,6 +12,7 @@ public class Maplocation {
 		myLocationX = x;
 		myLocationY = y;
 		myMap = map;
+		myObject = new MapObject(this);
 	}
 	
 	public boolean setMapObject (MapObject obj) {

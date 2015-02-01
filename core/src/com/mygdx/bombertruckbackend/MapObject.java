@@ -7,6 +7,7 @@ public class MapObject {
 	
 	public boolean penetratable = true;
 	public boolean playerPassable = true;
+	public String objectName = "Road"; 
 	protected Maplocation myLocObj = null; 
 	
 	public MapObject (Maplocation locObj) {

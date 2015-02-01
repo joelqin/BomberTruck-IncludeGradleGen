@@ -8,6 +8,9 @@ public class Player extends MapObject {
 	
 	public Player(Maplocation locObj) {
 		super(locObj);
+		this.objectName = "Player";
+		this.playerPassable = false;
+		this.penetratable = true;
 		// TODO Auto-generated constructor stub
 	}
 

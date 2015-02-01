@@ -8,10 +8,12 @@ public class Bomb extends MapObject {
 	private int bombPower = 0;
 	private int bombTimer = 0;
 	
+	
 	public Bomb(Maplocation locObj) {
 		super(locObj);
 		this.playerPassable = false;
 		this.penetratable = false;
+		this.objectName = "Bomb";
 	}
 	
 	public boolean setBombPower(int power) {

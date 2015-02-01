@@ -6,10 +6,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.bombertruckbackend.Map;
+import com.mygdx.bombertruckbackend.Maplocation;
+import com.mygdx.bombertruckbackend.MapObject;
 
 public class BomberTruckGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
+	//Texture img;
 	Texture playerImg;
 	Texture roadImg;
 	Map mapObj;
@@ -17,20 +19,33 @@ public class BomberTruckGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		//img = new Texture("badlogic.jpg");
 		playerImg = new Texture("player.png");
 		roadImg = new Texture("road.png");
-		mapObj = new Map(5,5,)
+		mapObj = new Map(5,5, true);
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		drawMap();
 	}
 	
-	public drawMap
+	public void drawMap() {
+		int cellWidth = 100;
+		int cellHeight = 100;
+		
+		batch.begin();
+		for (int x = 0; x < mapObj.getMapSizeX(); x++) {
+			for (int y = 0; y < mapObj.getMapSizeY(); y++) {
+				Maplocation mapLocObj = mapObj.getLocation(x,y);
+				MapObject mapObjectObj = mapLocObj.getMapObject();
+				if (mapObjectObj.objectName.equals("Road")) {
+					batch.draw(roadImg, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+				} else if (mapObjectObj.objectName.equals("Player")) {
+					batch.draw(playerImg, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+				}
+			}
+		}
+		batch.end();
+	}
 }
