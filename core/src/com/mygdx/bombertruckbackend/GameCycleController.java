@@ -17,6 +17,7 @@ public class GameCycleController {
 	public GameCycleController(Map map) {
 		this.mapObj = map;
 		this.cycleTimer = System.currentTimeMillis();
+		
 	}
 
 	public void onCycle() {
