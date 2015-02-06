@@ -10,24 +10,30 @@ import com.mygdx.bombertruckbackend.Maplocation;
 import com.mygdx.bombertruckbackend.MapObject;
 
 public class BomberTruckGame extends ApplicationAdapter {
+	
+	// eventually this is becomes the client
+	
 	SpriteBatch batch;
 	//Texture img;
 	Texture playerImg;
 	Texture roadImg;
 	Map mapObj;
-	
+	ClientConnector connectorObj;
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		//img = new Texture("badlogic.jpg");
 		playerImg = new Texture("player.png");
 		roadImg = new Texture("road.png");
-		mapObj = new Map(5,5, true);
+		connectorObj = new ClientConnector();
+		mapObj = connectorObj.getMap();
+		
 	}
 
 	@Override
 	public void render () {
 		drawMap();
+		connectorObj.update();
 	}
 	
 	public void drawMap() {
@@ -48,4 +54,5 @@ public class BomberTruckGame extends ApplicationAdapter {
 		}
 		batch.end();
 	}
+	
 }

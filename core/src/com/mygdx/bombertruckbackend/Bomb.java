@@ -36,8 +36,10 @@ public class Bomb extends MapObject {
 	
 	}
 	
-	public boolean onExplode() {
+	public void onExplode() {
 		bombTimer = 0;
+		setDetenate(true);
+		
 		Maplocation nextLoc = myLocObj.upLocation();
 		for (int upCount = 0; upCount < bombPower; upCount++) {
 			if (nextLoc != null) {
@@ -63,6 +65,7 @@ public class Bomb extends MapObject {
 				MapObject mapObj = nextLoc.getMapObject();
 			
 				mapObj.onDetenate();
+			
 				nextLoc = nextLoc.leftLocation();
 			}
 			
@@ -76,12 +79,19 @@ public class Bomb extends MapObject {
 				nextLoc = nextLoc.rightLocation();
 			}
 		}
-		return true;
 	}
 	
 	
-	public boolean onDetenate() {
+	public void onDetenate() {
 		onExplode();
-		return true;
+		// onExplode will set self to detentate
+		setCycleMuxTrue();
+	}
+	
+	public void onCycle() {
+		bombTimer--;
+		if (bombTimer == 0) {
+			onExplode();
+		}
 	}
 }
