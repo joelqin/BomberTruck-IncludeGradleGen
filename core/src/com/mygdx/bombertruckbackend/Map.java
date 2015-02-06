@@ -59,7 +59,7 @@ public class Map {
 		if (map == null) {
 			return null;
 		} 
-		else if ((mapSizeX < x) || (x < 0) || (mapSizeY < y) || (y < 0)) {
+		else if (((mapSizeX - 1) < x) || (x < 0) || ((mapSizeY - 1) < y) || (y < 0)) {
 			return null;
 		}
 		else {

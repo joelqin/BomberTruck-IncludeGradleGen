@@ -1,13 +1,11 @@
 package com.mygdx.bombertruckbackend;
 
-
 public class Player extends MapObject {
 
 	private int bombTimer = 3;
 	private int bombPower = 1;
 	private String playerID = null;
-	
-	
+
 	public Player(Maplocation locObj) {
 		super(locObj);
 		this.objectName = "Player";
@@ -24,70 +22,95 @@ public class Player extends MapObject {
 			return false;
 		}
 	}
-	
+
 	public boolean moveUp() {
-		
-		this.myLocObj.setMapObject(new MapObject(this.myLocObj));
-		// if leaving a detenating square, the new create square will detenate	
-		this.myLocObj.getMapObject().setDetenate(getDetenate());
-		this.myLocObj.getMapObject().setCycleMuxTrue();
-		// if arriving a detenating square, this will detenate		
-		setDetenate(this.myLocObj.upLocation().getMapObject().getDetenate());
-		
-		this.myLocObj.upLocation().setMapObject(this);
-		this.myLocObj = this.myLocObj.upLocation();
-		
-		setCycleMuxTrue();
-		return true;
+		if ((myLocObj.upLocation() != null) && (myLocObj.upLocation().getMapObject().playerPassable)) {
+			myLocObj.setMapObject(new MapObject(myLocObj));
+			// if leaving a detenating square, the new create square will
+			// detenate
+			myLocObj.getMapObject().setDetenate(getDetenate());
+			myLocObj.getMapObject().setCycleMuxTrue();
+			// if arriving a detenating square, this will detenate
+			setDetenate(myLocObj.upLocation().getMapObject().getDetenate());
+
+			myLocObj.upLocation().setMapObject(this);
+			myLocObj = myLocObj.upLocation();
+
+			setCycleMuxTrue();
+			return true;
+		} else {
+			setCycleMuxTrue();
+			return false;
+		}
+
 	}
-	
+
 	public boolean moveDown() {
-		this.myLocObj.setMapObject(new MapObject(this.myLocObj));
-		
-		// if leaving a detenating square, the new create square will detenate
-		this.myLocObj.getMapObject().setDetenate(getDetenate());
-		this.myLocObj.getMapObject().setCycleMuxTrue();
-		// if arriving a detenating square, this will detenate		
-		setDetenate(this.myLocObj.downLocation().getMapObject().getDetenate());
-		
-		this.myLocObj.downLocation().setMapObject(this);
-		this.myLocObj = this.myLocObj.downLocation();
-		
-		setCycleMuxTrue();
-		return true;
+
+		if ((myLocObj.downLocation() != null)  && (myLocObj.downLocation().getMapObject().playerPassable)) {
+
+			myLocObj.setMapObject(new MapObject(myLocObj));
+
+			// if leaving a detenating square, the new create square will
+			// detenate
+			myLocObj.getMapObject().setDetenate(getDetenate());
+			myLocObj.getMapObject().setCycleMuxTrue();
+			// if arriving a detenating square, this will detenate
+			setDetenate(myLocObj.downLocation().getMapObject().getDetenate());
+
+			myLocObj.downLocation().setMapObject(this);
+			myLocObj = myLocObj.downLocation();
+
+			setCycleMuxTrue();
+			return true;
+		} else {
+			setCycleMuxTrue();
+			return false;
+		}
 	}
-	
+
 	public boolean moveLeft() {
-		this.myLocObj.setMapObject(new MapObject(this.myLocObj));
-		
-		// if leaving a detenating square, the new create square will detenate
-		this.myLocObj.getMapObject().setDetenate(getDetenate());
-		this.myLocObj.getMapObject().setCycleMuxTrue();
-		// if arriving a detenating square, this will detenate		
-		setDetenate(this.myLocObj.leftLocation().getMapObject().getDetenate());
-		
-		this.myLocObj.leftLocation().setMapObject(this);
-		this.myLocObj = this.myLocObj.leftLocation();
-		
-		setCycleMuxTrue();
-		return true;
+		if ((myLocObj.leftLocation() != null)  && (myLocObj.leftLocation().getMapObject().playerPassable)) {
+			myLocObj.setMapObject(new MapObject(myLocObj));
+
+			// if leaving a detenating square, the new create square will
+			// detenate
+			myLocObj.getMapObject().setDetenate(getDetenate());
+			myLocObj.getMapObject().setCycleMuxTrue();
+			// if arriving a detenating square, this will detenate
+			setDetenate(myLocObj.leftLocation().getMapObject().getDetenate());
+
+			myLocObj.leftLocation().setMapObject(this);
+			myLocObj = myLocObj.leftLocation();
+
+			setCycleMuxTrue();
+			return true;
+		} else {
+			setCycleMuxTrue();
+			return false;
+		}
 	}
-	
+
 	public boolean moveRight() {
-		this.myLocObj.setMapObject(new MapObject(this.myLocObj));
-		
-		// if leaving a detenating square, the new create square will detenate
-		this.myLocObj.getMapObject().setDetenate(getDetenate());
-		this.myLocObj.getMapObject().setCycleMuxTrue();
-		// if arriving a detenating square, this will detenate		
-		setDetenate(this.myLocObj.rightLocation().getMapObject().getDetenate());
-		
-		this.myLocObj.rightLocation().setMapObject(this);
-		this.myLocObj = this.myLocObj.rightLocation();
-		
-		setCycleMuxTrue();
-		return true;
+		if ((myLocObj.rightLocation() != null) && (myLocObj.rightLocation().getMapObject().playerPassable)) {
+			myLocObj.setMapObject(new MapObject(myLocObj));
+
+			// if leaving a detenating square, the new create square will
+			// detenate
+			myLocObj.getMapObject().setDetenate(getDetenate());
+			myLocObj.getMapObject().setCycleMuxTrue();
+			// if arriving a detenating square, this will detenate
+			setDetenate(myLocObj.rightLocation().getMapObject().getDetenate());
+
+			myLocObj.rightLocation().setMapObject(this);
+			myLocObj = myLocObj.rightLocation();
+
+			setCycleMuxTrue();
+			return true;
+		} else {
+			setCycleMuxTrue();
+			return false;
+		}
 	}
-	
-	
+
 }
