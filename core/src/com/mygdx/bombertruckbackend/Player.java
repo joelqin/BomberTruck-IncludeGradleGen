@@ -1,4 +1,5 @@
 package com.mygdx.bombertruckbackend;
+import com.mygdx.bombertruckbackend.Bomb;
 
 public class Player extends MapObject {
 
@@ -6,12 +7,19 @@ public class Player extends MapObject {
 	private int bombPower = 1;
 	private String playerID = null;
 
+	private Bomb droppedBomb = null;
+	private boolean setDroppingBomb = false;
+	
+	private String defaultObjectName = null;
+	
 	public Player(Maplocation locObj) {
 		super(locObj);
 		this.objectName = "Player";
 		this.playerPassable = false;
 		this.penetratable = true;
-		// TODO Auto-generated constructor stub
+		this.droppedBomb = null;
+		this.setDroppingBomb = false;
+		this.defaultObjectName = this.objectName;
 	}
 
 	public boolean setPlayerID(String playerID) {
@@ -25,7 +33,8 @@ public class Player extends MapObject {
 
 	public boolean moveUp() {
 		if ((myLocObj.upLocation() != null) && (myLocObj.upLocation().getMapObject().playerPassable)) {
-			myLocObj.setMapObject(new MapObject(myLocObj));
+			droppingObject();
+			
 			// if leaving a detenating square, the new create square will
 			// detenate
 			myLocObj.getMapObject().setDetenate(getDetenate());
@@ -48,8 +57,7 @@ public class Player extends MapObject {
 	public boolean moveDown() {
 
 		if ((myLocObj.downLocation() != null)  && (myLocObj.downLocation().getMapObject().playerPassable)) {
-
-			myLocObj.setMapObject(new MapObject(myLocObj));
+			droppingObject();
 
 			// if leaving a detenating square, the new create square will
 			// detenate
@@ -71,7 +79,7 @@ public class Player extends MapObject {
 
 	public boolean moveLeft() {
 		if ((myLocObj.leftLocation() != null)  && (myLocObj.leftLocation().getMapObject().playerPassable)) {
-			myLocObj.setMapObject(new MapObject(myLocObj));
+			droppingObject();
 
 			// if leaving a detenating square, the new create square will
 			// detenate
@@ -93,7 +101,7 @@ public class Player extends MapObject {
 
 	public boolean moveRight() {
 		if ((myLocObj.rightLocation() != null) && (myLocObj.rightLocation().getMapObject().playerPassable)) {
-			myLocObj.setMapObject(new MapObject(myLocObj));
+			droppingObject();
 
 			// if leaving a detenating square, the new create square will
 			// detenate
@@ -112,5 +120,36 @@ public class Player extends MapObject {
 			return false;
 		}
 	}
-
+	
+	private void droppingObject() {
+		
+		// made into a method to reduce lines
+		if (setDroppingBomb == false) {
+			myLocObj.setMapObject(new MapObject(myLocObj));
+		} else {
+			if (droppedBomb == null) {
+				// should never reach here
+				myLocObj.setMapObject(new MapObject(myLocObj));
+			} else {
+				myLocObj.setMapObject(droppedBomb);
+			}
+		}
+		setDroppingBomb = false;
+		droppedBomb = null;
+		objectName = defaultObjectName;
+	}
+	
+	public boolean placeBomb() {
+		if (setDroppingBomb == false) {
+			droppedBomb = new Bomb(myLocObj);
+			droppedBomb.setBombPower(bombPower);
+			droppedBomb.setBombTimer(bombTimer);
+			objectName = objectName + "AndBomb";
+			setDroppingBomb = true;
+			return true;
+		}
+		return false;
+	}
+	
+	
 }

@@ -37,6 +37,9 @@ public class ClientConnector {
 		if (Gdx.input.isKeyPressed(Keys.S)) {
 			playerController.enqueueCommand("S");
 		}
+		if (Gdx.input.isKeyPressed(Keys.B)) {
+			playerController.enqueueCommand("B");
+		}
 		
 		//this going to be replace with a server side cycling when the project goes to web
 		connection.onCycle();

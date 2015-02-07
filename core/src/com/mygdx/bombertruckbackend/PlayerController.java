@@ -36,6 +36,8 @@ public class PlayerController {
 			player.moveLeft();
 		} else if (command.equals("D")){
 			player.moveRight();
+		} else if (command.equals("B")){
+			player.placeBomb();
 		}
 		command = null;
 		return true;
