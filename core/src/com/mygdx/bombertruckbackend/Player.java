@@ -1,5 +1,6 @@
 package com.mygdx.bombertruckbackend;
 import com.mygdx.bombertruckbackend.Bomb;
+import com.mygdx.bombertruckbackend.MapObject;
 
 public class Player extends MapObject {
 
@@ -130,13 +131,15 @@ public class Player extends MapObject {
 			if (droppedBomb == null) {
 				// should never reach here
 				myLocObj.setMapObject(new MapObject(myLocObj));
+				
 			} else {
 				myLocObj.setMapObject(droppedBomb);
 			}
 		}
+		myLocObj.getMapObject().setCycleMuxTrue();
 		setDroppingBomb = false;
 		droppedBomb = null;
-		objectName = defaultObjectName;
+		objectName = defaultObjectName; // after it drop a bomb, it is no longer playerandbomb
 	}
 	
 	public boolean placeBomb() {

@@ -24,6 +24,10 @@ public class MapObject {
 	
 	public void onCycle() {
 		// empty space does nothing
+		
+		if (getDetenate() == true) {
+			myLocObj.setMapObject(new Explode(myLocObj));
+		}
 		cycledMux = true;
 	}
 	

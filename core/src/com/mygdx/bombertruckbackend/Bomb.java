@@ -7,17 +7,18 @@ public class Bomb extends MapObject {
 
 	private int bombPower = 0;
 	private int bombTimer = 0;
-	
+	private boolean exploded = false; // trigged to true when bomb exploded.
 	
 	public Bomb(Maplocation locObj) {
 		super(locObj);
 		this.playerPassable = false;
 		this.penetratable = false;
+		this.exploded = false;
 		this.objectName = "Bomb";
 	}
 	
 	public boolean setBombPower(int power) {
-		if (power == 0) {
+		if (bombPower == 0) {
 			bombPower = power;
 			return true;
 		} else {
@@ -27,7 +28,7 @@ public class Bomb extends MapObject {
 	}
 	
 	public boolean setBombTimer(int time) {
-		if (time == 0) {
+		if (bombTimer == 0) {
 			bombTimer = time;
 			return true;
 		} else {
@@ -39,7 +40,7 @@ public class Bomb extends MapObject {
 	public void onExplode() {
 		bombTimer = 0;
 		setDetenate(true);
-		
+		exploded = true;
 		Maplocation nextLoc = myLocObj.upLocation();
 		for (int upCount = 0; upCount < bombPower; upCount++) {
 			if (nextLoc != null) {
@@ -79,19 +80,27 @@ public class Bomb extends MapObject {
 				nextLoc = nextLoc.rightLocation();
 			}
 		}
+		
 	}
 	
 	
 	public void onDetenate() {
-		onExplode();
+		if (exploded == false) {
+			onExplode();
+		}
+		
 		// onExplode will set self to detentate
 		setCycleMuxTrue();
 	}
 	
 	public void onCycle() {
 		bombTimer--;
-		if (bombTimer == 0) {
+		if (getDetenate() == true) {
+			myLocObj.setMapObject(new Explode(myLocObj));
+		}
+		if (bombTimer < 0) {
 			onExplode();
 		}
+		setCycleMuxTrue();
 	}
 }

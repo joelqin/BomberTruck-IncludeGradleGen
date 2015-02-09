@@ -19,6 +19,7 @@ public class BomberTruckGame extends ApplicationAdapter {
 	Texture roadImg;
 	Texture bombImg;
 	Texture playerandbombImg;
+	Texture explodeImg;
 	Map mapObj;
 	ClientConnector connectorObj;
 	@Override
@@ -29,6 +30,7 @@ public class BomberTruckGame extends ApplicationAdapter {
 		roadImg = new Texture("road.png");
 		bombImg = new Texture("bomb.png");
 		playerandbombImg = new Texture("playerandbomb.png");
+		explodeImg = new Texture("explode.png");
 		connectorObj = new ClientConnector();
 		mapObj = connectorObj.getMap();
 		
@@ -57,7 +59,9 @@ public class BomberTruckGame extends ApplicationAdapter {
 					batch.draw(bombImg, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
 				} else if (mapObjectObj.objectName.equals("PlayerAndBomb")) {
 					batch.draw(playerandbombImg, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
-				}		
+				} else if (mapObjectObj.objectName.equals("Explode")) {
+					batch.draw(explodeImg, x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+				}			
 			}
 		}
 		batch.end();
